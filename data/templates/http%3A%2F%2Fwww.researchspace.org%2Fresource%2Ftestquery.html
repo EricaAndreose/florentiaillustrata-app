@@ -1,0 +1,162 @@
+<bs-row style="margin-top:80px;">
+  <bs-col md="9">
+    <div style="height: 1100px;">
+    <semantic-context repository="ephedra">
+      <semantic-map-advanced
+          id="test-map"
+          target-controls='["search-map-control"]'
+          map-options='{"crs":"EPSG:4326", "extent": [1358358.959761288, 5681238.026850056, 1385414.0522355612, 5705635.9345880805]}'
+          year-filtering=false
+          query='
+          PREFIX rs_sql_sail: <http://www.researchspace.org/resource/system/sql#>
+          PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+          PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+          PREFIX florentiaIllustrata_sql: <http://www.researchspace.org/resource/system/service/florentiaIllustrata_sql#>
+
+          SELECT DISTINCT ?belli_id ?wkt WHERE {
+            
+            # Subquery: Retrieve `belli_id` and geometries (`wkt`) from SQL Service
+            {
+              SELECT ?belli_id ?wkt WHERE {
+                SERVICE <http://www.researchspace.org/resource/system/repository/federation#metapolisService> {
+                    ?root rs_sql_sail:hasQueryId "geometries" ;
+                          florentiaIllustrata_sql:belli_id ?belli_id ;
+                          florentiaIllustrata_sql:wkt ?wkt .
+                }
+              }
+            }
+            
+            # Connect `belli_id` from SQL to RDF Graph
+            ?appezzamento crm:P1_is_identified_by ?belli_id_uri .
+            ?belli_id_uri rdfs:label ?belli_id .
+            
+            # Ensure that only parcels with use = "macelleria" are retrieved
+            ?appezzamento crm:P101_has_as_general_use <https://florentiaillustrata.net/resource/uso/macelleria> .
+          }
+             
+  		
+                            
+            
+
+            '
+
+          tuple-template='<b>{{belli_id}}</b>'
+      >
+
+      <tiles-layer
+        thumbnail='../assets/images/wkt.png' 
+        name='Geometries Layer'
+        level='basemap'
+        author="Catasto Fiorentino 1834"
+        location=""
+        year="1834">
+        <!-- Usa un layer geometrico custom -->
+        <feature-layer
+            query='
+            PREFIX rs_sql_sail: <http://www.researchspace.org/resource/system/sql#>
+            PREFIX crm: <http://www.cidoc-crm.org/cidoc-crm/>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX florentiaIllustrata_sql: <http://www.researchspace.org/resource/system/service/florentiaIllustrata_sql#>
+
+            SELECT DISTINCT ?belli_id ?wkt WHERE {
+              
+              # Subquery: Retrieve `belli_id` and geometries (`wkt`) from SQL Service
+              {
+                SELECT ?belli_id ?wkt WHERE {
+                  SERVICE <http://www.researchspace.org/resource/system/repository/federation#metapolisService> {
+                      ?root rs_sql_sail:hasQueryId "geometries" ;
+                            florentiaIllustrata_sql:belli_id ?belli_id ;
+                            florentiaIllustrata_sql:wkt ?wkt .
+                  }
+                }
+              }
+              
+              # Connect `belli_id` from SQL to RDF Graph
+              ?appezzamento crm:P1_is_identified_by ?belli_id_uri .
+              ?belli_id_uri rdfs:label ?belli_id .
+              
+              # Ensure that only parcels with use = "macelleria" are retrieved
+              ?appezzamento crm:P101_has_as_general_use <https://florentiaillustrata.net/resource/uso/macelleria> .
+            }
+            '
+            geometry-type="wkt" 
+            
+            
+        >
+        </feature-layer>
+      </tiles-layer>
+
+
+        <tiles-layer
+            thumbnail='../assets/images/satellite.png'  
+            url='http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}'  
+            identifier='GSatellite'  
+            name='Google Satellite'  
+            level='overlay'
+            author="Google Satellite 2024"
+            location=""
+            year="2024">
+        </tiles-layer>
+
+
+        <tiles-layer
+          thumbnail='../assets/images/osm.png' 
+          url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+          identifier='OpenStreetMap'
+          name='OpenStreetMap'
+          level='overlay'
+          author="OpenStreetMap 2024"
+          location=""
+          year="2024">
+        </tiles-layer>
+
+        <tiles-layer
+          thumbnail='../assets/images/roadmap.png'  
+          url='http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}'
+          identifier='GMapsRoadmap'
+          name='Google Maps Roadmap'
+          level='overlay'
+          author="Google Maps 2024"
+          location=""
+          year="2024">
+        </tiles-layer>
+
+
+
+     
+
+      </semantic-map-advanced>
+    </semantic-context>
+  </div>
+  </bs-col>
+  <bs-col md="3">
+    <div style="height:100%; border:1px solid #e86c46; width: 100%;">
+      <semantic-map-controls
+          id="test-map-controls"
+          target-map-id="test-map"
+          features-options-enabled="true"
+          features-taxonomies=""
+          features-color-taxonomies=""
+          features-colors-palette='{
+            "Open spaces (green)":"rgba(195,217,175,0.5)",
+            "Urban buildings":"rgba(253,230,171,0.5)",
+            "Open spaces":"rgba(176,200,224,0.5)",
+            "Religious buildings":"rgba(102,140,170,0.5)",
+            "Waterways":"rgba(154,221,251,0.5)",
+            "Services":"rgba(227,195,233,0.5)",
+            "Commercial":"rgba(226,164,164,0.5)"
+          }'
+      >
+      
+      </semantic-map-controls>
+  </div>
+</bs-col>
+</bs-row>
+
+<style>
+.colorsLegend {
+  top: 200px;
+}
+</style>
