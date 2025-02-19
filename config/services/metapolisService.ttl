@@ -1,0 +1,327 @@
+PREFIX sp: <http://spinrdf.org/sp#>
+PREFIX spin: <http://spinrdf.org/spin#>
+PREFIX spl: <http://spinrdf.org/spl#>
+PREFIX : <http://www.researchspace.org/resource/system/repository#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rs_sql_sail: <http://www.researchspace.org/resource/system/sql#>
+PREFIX florentiaIllustrata_sql: <http://www.researchspace.org/resource/system/service/florentiaIllustrata_sql#>
+PREFIX ephedra: <http://www.researchspace.org/resource/system/ephedra#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+:metapolisService a ephedra:Service ;
+  <http://www.openrdf.org/config/sail#sailType> "researchspace:SQL" ;
+  rdfs:label "Metapolis Service" ;
+  ephedra:hasSPARQLPattern (
+    [
+      sp:subject :_results ;
+      sp:predicate rs_sql_sail:hasQueryId ;
+      sp:object :queryId
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:id ;
+      sp:object :_id
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:belli_id ;
+      sp:object :_belli_id
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:wkt ;
+      sp:object :_wkt
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:sezione ;
+      sp:object :_sezione
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:foglio ;
+      sp:object :_foglio
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:appezzamen_cleaned ;
+      sp:object :_appezzamen_cleaned
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:car_ediliz ;
+      sp:object :_car_ediliz
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:den_relig ;
+      sp:object :_den_relig
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:specie_pro ;
+      sp:object :_specie_pro
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:sup_bq ;
+      sp:object :_sup_bq
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:toponomast ;
+      sp:object :_toponomast
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:num_civico ;
+      sp:object :_num_civico
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:uso_ts ;
+      sp:object :_uso_ts
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:car_fun_se ;
+      sp:object :_car_fun_se
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:car_fun_sa ;
+      sp:object :_car_fun_sa
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:car_veg_sa ;
+      sp:object :_car_veg_sa
+    ]
+    [
+      sp:subject :_results ;
+      sp:predicate florentiaIllustrata_sql:macro ;
+      sp:object :_macro
+    ]
+  ) ;
+  spin:constraint
+  [
+    a spl:Argument ;
+    rdfs:comment "query ID" ;
+    spl:predicate :_queryId ;
+    spl:valueType xsd:string
+	] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Unique Identifier" ;
+    spl:predicate :_id ;
+    spl:valueType xsd:integer
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Geometry Data" ;
+    spl:predicate :_wkt ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Section" ;
+    spl:predicate :_sezione ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Sheet Number" ;
+    spl:predicate :_foglio ;
+    spl:valueType xsd:integer
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Parcel" ;
+    spl:predicate :_appezzamen ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Building Characteristics" ;
+    spl:predicate :_car_ediliz ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Religious Denomination" ;
+    spl:predicate :_den_relig ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Property Species" ;
+    spl:predicate :_specie_pro ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Surface Area" ;
+    spl:predicate :_sup_bq ;
+    spl:valueType xsd:integer
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Toponymy" ;
+    spl:predicate :_toponomast ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Civic Number" ;
+    spl:predicate :_num_civico ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Land Use" ;
+    spl:predicate :_uso_ts ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Functional Characteristics SE" ;
+    spl:predicate :_car_fun_se ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Functional Characteristics SA" ;
+    spl:predicate :_car_fun_sa ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Vegetative Characteristics SA" ;
+    spl:predicate :_car_veg_sa ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Macro Categories" ;
+    spl:predicate :_macro ;
+    spl:valueType xsd:string
+  ] ;
+  spin:column
+  [
+    a spin:Column ;
+    rdfs:comment "Belli ID" ;
+    spl:predicate :_belli_id ;
+    spl:valueType xsd:string
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasParcel" ;
+    rs_sql_sail:text "SELECT DISTINCT \"appezzamen_cleaned\" as appezzamen_cleaned FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasId" ;
+    rs_sql_sail:text "SELECT \"id\" as id FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasGeometry" ;
+    rs_sql_sail:text "SELECT ST_AsText(ST_Force2D(ST_Transform(\"geom\", 3857))) as wkt FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasSection" ;
+    rs_sql_sail:text "SELECT \"sezione\" as sezione FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasSheetNumber" ;
+    rs_sql_sail:text "SELECT \"foglio\" as foglio FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasBuildingCharacteristics" ;
+    rs_sql_sail:text "SELECT \"car_ediliz\" as car_ediliz FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasReligiousDenomination" ;
+    rs_sql_sail:text "SELECT \"den_relig\" as den_relig FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasPropertySpecies" ;
+    rs_sql_sail:text "SELECT COALESCE(\"specie_pro\", \"macro\") as specie_pro FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasSurfaceArea" ;
+    rs_sql_sail:text "SELECT \"sup_bq\" as sup_bq FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasToponymy" ;
+    rs_sql_sail:text "SELECT \"toponomast\" as toponomast FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasCivicNumber" ;
+    rs_sql_sail:text "SELECT \"num_civico\" as num_civico FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasLandUse" ;
+    rs_sql_sail:text "SELECT \"uso_ts\" as uso_ts FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasFunctionalCharacteristicsSE" ;
+    rs_sql_sail:text "SELECT \"car_fun_se\" as car_fun_se FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasFunctionalCharacteristicsSA" ;
+    rs_sql_sail:text "SELECT \"car_fun_sa\" as car_fun_sa FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasVegetativeCharacteristicsSE" ;
+    rs_sql_sail:text "SELECT \"car_veg_sa\" as car_veg_sa FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "hasMacro" ;
+    rs_sql_sail:text "SELECT \"macro\" as macro FROM parcellizzazione_fondiaria;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "all" ;
+    rs_sql_sail:text "SELECT \"id\" as id, ST_AsText(ST_Force2D(ST_Transform(\"geom\", 4326))) as wkt, \"sezione\" as sezione, \"foglio\" as foglio, \"appezzamen_cleaned\" as appezzamen_cleaned, \"car_ediliz\" as car_ediliz, \"den_relig\" as den_relig, \"sup_bq\" as sup_bq, \"toponomast\" as toponomast, \"num_civico\" as num_civico, \"uso_ts\" as uso_ts, \"car_fun_se\" as car_fun_se, \"car_fun_sa\" as car_fun_sa, \"car_veg_sa\" as car_veg_sa, \"macro\" as macro, COALESCE(\"specie_pro\", \"macro\") as specie_pro FROM parcellizzazione_fondiaria WHERE \"geom\" IS NOT NULL;"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "chiudi" ;
+    rs_sql_sail:text "SELECT \"id\" as id, ST_AsText(ST_Force2D(ST_Transform(\"geom\", 4326))) as wkt, \"macro\" as macro, COALESCE(\"specie_pro\", \"macro\") as specie_pro FROM parcellizzazione_fondiaria WHERE macro = 'spazio aperto';"
+  ] ;
+  rs_sql_sail:includesSQLQuery
+  [
+    rs_sql_sail:hasQueryId "geometries" ;
+    rs_sql_sail:text "SELECT DISTINCT belli_id, ST_AsText(ST_Force2D(ST_Transform(\"geom\", 4326))) as wkt, macro, appezzamen_cleaned FROM parcellizzazione_fondiaria WHERE geom IS NOT NULL;"
+  ] .
